@@ -2,10 +2,10 @@ var http = require('http');
 var fs = require('fs');
 var cheerio = require('cheerio');
 var request = require('request');
-var url = "http://zujuan.21cnjy.com/paper/view/437919"
 var i = 0
 var answerId = JSON.parse(fs.readFileSync('data.txt','utf-8'))//同步读取
 
+var url = "http://zujuan.21cnjy.com/paper/view/"+answerId[0].listId
 
 function fetchPage(x) {     //封装了一层函数
 	startRequest(x); 
