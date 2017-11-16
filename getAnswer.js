@@ -2,8 +2,11 @@ var http = require('http');
 var fs = require('fs');
 var cheerio = require('cheerio');
 var request = require('request');
-var url = "http://zujuan.21cnjy.com/paper/index?page=1&per-page=10"
-var list = []
+var url = "http://zujuan.21cnjy.com/paper/view/437919"
+var i = 0
+var answerId = JSON.parse(fs.readFileSync('data.txt','utf-8'))//同步读取
+
+
 function fetchPage(x) {     //封装了一层函数
 	startRequest(x); 
 }
@@ -20,29 +23,34 @@ function startRequest(x) {
      //监听end事件，如果整个网页内容的html都获取完毕，就执行回调函数
      res.on('end', function () {	
          var $ = cheerio.load(html); //采用cheerio模块解析html
-         var li = $(".search-list").find("li")
-         var page =$(".pagenum").find("a").last()
-         li.each(function(){
-         	var target = $(this).find(".test-txt").find("p").eq(0).find("a")
-         	var targetData = {
-         		title:target.text().trim(),
-         		listId:target.attr("href").replace(/[^0-9]/ig,"")
-         	}
-         	list.push(targetData)
-         })
-         fs.appendFile('data.txt',JSON.stringify(list,null,4),'utf-8', function (err) {
-         		if (err) {
-         			console.log(err);
-         		}
-         	});	
-         	console.log(list)
-         // var nextLink="http://zujuan.21cnjy.com/" + page.attr('href');
-         // if(page.text()=='下一页'){//递归
-         // 	fetchPage(nextLink)
-         // }
+         console.log(html)
+         //
+         //
+         //
+         ++i;
+         if(i==answerId.length){
+         	return
+         }
+         var news_title = answerId[i].title
+         savedContent(news_title);  //存储每篇文章的内容及文章标题
+         var str = "http://zujuan.21cnjy.com/paper/view/"+answerId[i].listId
+         fetchPage(str)
      });
+
  }).on('error', function (err) {
  	console.log(err);
  });
 }
+
+
+       //该函数的作用：在本地存储所爬取的新闻内容资源
+function savedContent(news_title) {
+    fs.appendFile('./data/' + news_title + '.txt', 1111, 'utf-8', function (err) {
+        if (err) {
+            console.log(err);
+        }
+    });
+}
+
+
 fetchPage(url);      //主程序开始运行
