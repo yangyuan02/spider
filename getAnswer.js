@@ -21,18 +21,21 @@ function startRequest(x) {
      	html += chunk;
      });
      //监听end事件，如果整个网页内容的html都获取完毕，就执行回调函数
-     res.on('end', function () {	
-         var $ = cheerio.load(html); //采用cheerio模块解析html
-         console.log(html)
-         //
-         //
-         //
+     res.on('end', function () {
          ++i;
          if(i==answerId.length){
-         	return
-         }
+            return
+         }	
+         var $ = cheerio.load(html); //采用cheerio模块解析html
          var news_title = answerId[i].title
-         savedContent(news_title);  //存储每篇文章的内容及文章标题
+
+         var data = {}
+         data.examName = news_title
+         data.examCont = []
+
+
+
+         savedContent(news_title,data);  
          var str = "http://zujuan.21cnjy.com/paper/view/"+answerId[i].listId
          fetchPage(str)
      });
@@ -43,9 +46,45 @@ function startRequest(x) {
 }
 
 
-       //该函数的作用：在本地存储所爬取的新闻内容资源
-function savedContent(news_title) {
-    fs.appendFile('./data/' + news_title + '.txt', 1111, 'utf-8', function (err) {
+function getBigQuestionTitle(ele){//获取最大提标题   'preview-body'
+    var examCont = [] 
+    var itme = $('.'+ele).find(".search-list")
+    itme.each(function(index,itme){
+        var title = {}
+        title.bigQuestionName = $(this).prev("h3").text().trim()
+        title.questionGroup = []
+        getItemQuestionTitle($(this),title)
+        examCont.push(title)
+    })
+    return JSON.stringify(examCont,null,4)
+}
+
+function getItemQuestionTitle(ele,obj){ //获取大题中小题  'search-list'
+    var questionGroup = obj.questionGroup
+    var itme = ele.find("li")
+    itme.each(function(){
+        var itmeObj = {}
+        itmeObj.itemName = $(this).find(".exam-q").text().trim()
+        itmeObj.itmeCont = []
+        questionGroup.push(itmeObj)
+        getOptionsCont($(this),itmeObj)
+    })
+}
+
+function getOptionsCont(ele,obj){ //获取选项内容    'op-item'
+    var itmeCont = obj.itmeCont
+    var itme = ele.find(".op-item")
+    itme.each(function(){
+        var opt = {}
+        opt.option = $(this).find(".op-item-meat").text().trim()
+        itmeCont.push(opt)
+    })
+}
+
+getBigQuestionTitle('preview-body')
+
+function savedContent(news_title,data) {
+    fs.appendFile('./data/' + news_title + '.txt', JSON.stringify(data,null,4), 'utf-8', function (err) {
         if (err) {
             console.log(err);
         }

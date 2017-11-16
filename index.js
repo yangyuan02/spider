@@ -36,10 +36,10 @@ function startRequest(x) {
          		}
          	});	
          	console.log(list)
-         // var nextLink="http://zujuan.21cnjy.com/" + page.attr('href');
-         // if(page.text()=='下一页'){//递归
-         // 	fetchPage(nextLink)
-         // }
+         var nextLink="http://zujuan.21cnjy.com/" + page.attr('href');
+         if(page.text()=='下一页'){//递归
+         	fetchPage(nextLink)
+         }
      });
  }).on('error', function (err) {
  	console.log(err);
