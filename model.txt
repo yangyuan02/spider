@@ -10,7 +10,7 @@
 						{"option":"选项一"},
 						{"option":"选项二"},
 						{"option":"选项三"},
-						{"option":"选项四"},
+						{"option":"选项四"}
 					]
 				},
 				{
@@ -19,7 +19,7 @@
 						{"option":"选项一"},
 						{"option":"选项二"},
 						{"option":"选项三"},
-						{"option":"选项四"},
+						{"option":"选项四"}
 					]
 				},
 				{
@@ -28,12 +28,12 @@
 						{"option":"选项一"},
 						{"option":"选项二"},
 						{"option":"选项三"},
-						{"option":"选项四"},
+						{"option":"选项四"}
 					]
-				},
+				}
 			]
 		},
 		{"bigQuestionName":"填空题"},
-		{"bigQuestionName":"解答题"},
+		{"bigQuestionName":"解答题"}
 	]
 }
