@@ -1,10 +1,21 @@
-{
+{	"examId":12345,
 	"examName":"黑龙江省佳木斯市2017年中考数学一模试卷",
 	"examCont":[
 		{
 			"bigQuestionName":"选择题",
 			"questionGroup":[
-				{
+				{	
+					"itmeId":'12344',
+					"itemName":"下面划横线全部正确的一项是",
+					"itmeCont":[
+						{"option":"选项一"},
+						{"option":"选项二"},
+						{"option":"选项三"},
+						{"option":"选项四"}
+					]
+				},
+				{	
+					"itmeId":'12344',
 					"itemName":"下面划横线全部正确的一项是",
 					"itmeCont":[
 						{"option":"选项一"},
@@ -14,15 +25,7 @@
 					]
 				},
 				{
-					"itemName":"下面划横线全部正确的一项是",
-					"itmeCont":[
-						{"option":"选项一"},
-						{"option":"选项二"},
-						{"option":"选项三"},
-						{"option":"选项四"}
-					]
-				},
-				{
+					"itmeId":'12344',
 					"itemName":"下面划横线全部正确的一项是",
 					"itmeCont":[
 						{"option":"选项一"},

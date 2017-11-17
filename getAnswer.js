@@ -64,7 +64,7 @@ function getItemQuestionTitle(ele,obj){ //获取大题中小题  'search-list'
     var itme = ele.find("li")
     itme.each(function(){
         var itmeObj = {}
-        itmeObj.itemQuestionId = $(this).attr("data-qid")
+        itmeObj.itmeId = $(this).attr("data-qid")
         itmeObj.itemName = $(this).find(".exam-q").text().trim()
         itmeObj.itmeCont = []
         questionGroup.push(itmeObj)
