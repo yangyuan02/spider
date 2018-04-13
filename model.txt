@@ -7,6 +7,7 @@
 				{	
 					"itmeId":'12344',
 					"itemName":"下面划横线全部正确的一项是",
+					"itemImg":["httt://www.baidu.com/1.jpg","httt://www.baidu.com/2.jpg"]
 					"itmeCont":[
 						{"option":"选项一"},
 						{"option":"选项二"},

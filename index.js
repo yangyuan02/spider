@@ -2,7 +2,7 @@ var http = require('http');
 var fs = require('fs');
 var cheerio = require('cheerio');
 var request = require('request');
-var url = "http://zujuan.21cnjy.com/paper/index?page=1&per-page=10"
+var url = "https://zujuan.21cnjy.com/paper/index?page=1&per-page=10"
 var list = []
 function fetchPage(x) {     //封装了一层函数
 	startRequest(x); 
@@ -20,6 +20,7 @@ function startRequest(x) {
      //监听end事件，如果整个网页内容的html都获取完毕，就执行回调函数
      res.on('end', function () {	
          var $ = cheerio.load(html); //采用cheerio模块解析html
+         console.log(html)
          var li = $(".search-list").find("li")
          var page =$(".pagenum").find("a").last()
          li.each(function(){

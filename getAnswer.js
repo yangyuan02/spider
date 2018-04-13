@@ -56,7 +56,7 @@ function getBigQuestionTitle(ele){//获取最大提标题   'preview-body'
         getItemQuestionTitle($(this),title)
         examCont.push(title)
     })
-    return JSON.stringify(examCont,null,4)
+    return examCont,null,4
 }
 
 function getItemQuestionTitle(ele,obj){ //获取大题中小题  'search-list'
